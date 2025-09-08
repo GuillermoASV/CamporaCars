@@ -1,0 +1,12 @@
+{
+"id": "68af732a128ce843efe68cdf",
+"nombre": "hola test1",
+"apellido": "test",
+"descripcion": "dddddd",
+"importancia": "Alta",
+"fecha": "25 de agosto de 2025",
+"limiteFecha": "2025-08-26T04:00:00.000Z",
+"titulo": "test 5",
+"presupuesto": 500,
+"completado": true
+}

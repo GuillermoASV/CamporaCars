@@ -1,0 +1,17 @@
+{
+  "_id": { "$oid": "68af732a128ce843efe68cdf" },
+  "nombre": "test",
+  "apellido": "test",
+  "descripcion": "test",
+  "importancia": "Alta",
+  "fecha": "27 de agosto de 2025",
+  "limiteFecha": "2025-08-28T04:00:00.000Z",
+  "titulo": "test",
+  "completado": true,
+  "materiales": [],
+  "cantidades": [],
+  "gastos": [],
+  "createdAt": { "$date": { "$numberLong": "1756328746478" } },
+  "__v": { "$numberInt": "0" },
+  "deleted": true
+}

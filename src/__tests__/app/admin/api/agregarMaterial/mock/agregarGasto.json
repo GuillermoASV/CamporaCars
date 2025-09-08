@@ -1,0 +1,6 @@
+{
+    "id": { "$oid": "68af732a128ce843efe68cdf" },
+    "gastos": 50,
+    "materiales":"Tornillos",
+    "cantidades": 100
+}

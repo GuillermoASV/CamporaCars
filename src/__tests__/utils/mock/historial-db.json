@@ -1,0 +1,26 @@
+[
+  {
+    "_id": { "$oid": "68b35cabccd803afdb0e54cb" },
+    "accion": "La tarea \"test\" ha sido creada exitosamente",
+    "titulo": "test1",
+    "nombre": "test1",
+    "apellido": "test1",
+    "descripcion": "test1",
+    "importancia": "Baja",
+    "fecha": "30 de agosto de 2025",
+    "limiteFecha": "2025-08-31T04:00:00.000Z",
+    "__v": { "$numberInt": "0" }
+  },
+  {
+    "_id": { "$oid": "68b35cabccd803afdb0e54cb" },
+    "accion": "Se registró un nuevo gasto en \"test\"",
+    "titulo": "test1",
+    "nombre": "test1",
+    "apellido": "test1",
+    "descripcion": "test1",
+    "importancia": "Baja",
+    "fecha": "30 de agosto de 2025",
+    "limiteFecha": "2025-08-31T04:00:00.000Z",
+    "__v": { "$numberInt": "0" }
+  }
+]

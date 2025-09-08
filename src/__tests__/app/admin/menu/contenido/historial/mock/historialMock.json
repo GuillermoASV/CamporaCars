@@ -1,0 +1,12 @@
+{
+  "_id": { "$oid": "68b0cb637113674e819d3f75" },
+  "accion": "Ha sido agregado un nuevo gasto a  el TODO con el titulo Un robot",
+  "titulo": "Un robot",
+  "nombre": "John",
+  "apellido": "Doe",
+  "descripcion": "test test test test",
+  "importancia": "Alta",
+  "fecha": "28 de agosto de 2025",
+  "limiteFecha": "2025-12-03T04:00:00.000Z",
+  "__v": { "$numberInt": "0" }
+}
