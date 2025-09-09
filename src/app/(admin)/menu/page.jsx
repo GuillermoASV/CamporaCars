@@ -26,12 +26,12 @@ export default function Page() {
   return (
     <div className="relative flex min-h-screen items-center justify-center bg-gradient-to-bl from-gray-100 to-red-50">
       <div>
-        <div className="text-center">
+        <header className="text-center">
           <h1 className="text-4xl font-bold text-black">Menu de inicio</h1>
           <p className="mt-2 mb-6 text-slate-700">
             Selecciona una opción para diriguirte a una ruta
           </p>
-        </div>
+        </header>
         {loading && (
           <div className="absolute inset-0 z-20 flex min-h-screen items-center justify-center gap-4 bg-gray-400/40">
             <p className="font-bold tracking-wide">{TEXTOCARGA}</p>
@@ -39,7 +39,7 @@ export default function Page() {
           </div>
         )}
 
-        <div className="grid h-[600px] w-[850px] grid-cols-3 grid-rows-3 gap-4">
+        <nav className="grid h-[600px] w-[850px] grid-cols-3 grid-rows-3 gap-4">
           <div className="group col-span-2 col-start-2 row-span-1 row-start-1 flex flex-col items-center justify-center rounded-sm bg-red-300 shadow-sm duration-200 ease-out hover:scale-105 hover:bg-red-400 hover:shadow-md">
             <History
               size={40}
@@ -62,7 +62,7 @@ export default function Page() {
           <div className="group col-span-1 col-start-1 row-span-1 row-start-1 flex flex-col items-center justify-center rounded-sm bg-blue-300 shadow-sm duration-200 ease-out hover:scale-105 hover:bg-blue-400 hover:shadow-md">
             <Coins
               size={40}
-              className="rounded-full bg-blue-200 p-2 duration-300 group-hover:bg-blue-300 hover:text-white"
+              className="rounded-full bg-blue-200 p-2 duration-300 group-hover:bg-blue-300"
             />
             <Link href={navigationItems[0].presupuesto}>
               <Button
@@ -116,7 +116,7 @@ export default function Page() {
               </Button>
             </Link>
           </div>
-        </div>
+        </nav>
       </div>
     </div>
   );

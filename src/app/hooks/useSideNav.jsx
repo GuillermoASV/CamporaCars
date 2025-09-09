@@ -58,7 +58,6 @@ export default function AppSidebar() {
             {referencias.map((i) => {
               const href = `/menu/${i.href}`;
               return (
-                //className={'rounded-none'}
                 <SidebarMenuItem key={i.title}>
                   <Tooltip delayDuration={1000}>
                     <TooltipTrigger asChild>

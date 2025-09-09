@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
-import { Hash, PackageSearch, DollarSign, Box } from 'lucide-react';
+import { PackageSearch, DollarSign, Box } from 'lucide-react';
 
 const DialogoListaEditar = ({ tarea, alConfirmar }) => {
   const [material, setMaterial] = useState(tarea.materialYCosto[0]);

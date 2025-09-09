@@ -1,5 +1,6 @@
 import connectToDatabase from '@/mongoose/mongoose';
 import { Todo } from '@/mongoose/todo-model';
+import { DICCIONARIO } from '@/utils/diccionario/constantes';
 import { NextResponse } from 'next/server';
 
 export async function PUT(req) {

@@ -2,22 +2,19 @@ import { NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 import { BORRARCOOKIE, BORRARCOOKIEYREDIRECCIONAR } from './utils/cookies-delete';
 
-const CLAVE_SECRETA = new TextEncoder().encode('clave_secreta');
+const CLAVE_SECRETA = new TextEncoder().encode(process.env.CLAVE_SECRETA);
 
 async function validarToken(token) {
   if (!token) return false;
 
-  if (token === 'clave_secreta') {
-    console.log('SECRET PASS es válido.');
+  if (token === process.env.CLAVE_SECRETA) {
     return true;
   }
 
   try {
     await jwtVerify(token, CLAVE_SECRETA);
-    console.log('JWT es válido.');
     return true;
   } catch (error) {
-    console.log('Token JWT inválido:', error.message);
     return false;
   }
 }

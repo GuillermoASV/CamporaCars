@@ -58,7 +58,8 @@ export default function Page() {
     }
   };
 
-  const verificarToken = async () => {
+  const verificarToken = async (event) => {
+    event.preventDefault();
     const response = await fetch('/api/verificarToken', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -76,7 +77,6 @@ export default function Page() {
         route.push('/menu');
       }, 500);
     } else {
-      console.log('Error al verificar el token');
       toast.error('El token ingresado es incorrecto o ha expirado.', {
         description: `Intenta verificar si tu token esta bien escrito o si no ha expirado`,
         icon: '❌',
@@ -87,42 +87,43 @@ export default function Page() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-bl from-gray-100 to-red-50">
+    <section
+      aria-labelledby="inicio-seccion"
+      className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-bl from-gray-100 to-red-50"
+    >
       <div className="w-full max-w-lg space-y-8 rounded-lg bg-white p-6 shadow-md">
         <div className="space-y-4">
-          <h1 className={`${roboto.className} text-center text-3xl font-bold text-gray-900`}>
-            INICIO DE SECCION
-          </h1>
+          <header>
+            <h1 className={`${roboto.className} text-center text-3xl font-bold text-gray-900`}>
+              INICIO DE SECCION
+            </h1>
+          </header>
           <div className="relative m-2 max-w-xl space-y-4">
             <label className="mb-2 block text-sm font-medium opacity-85" htmlFor="pass">
               Ingresa tu token
             </label>
-            <Input
-              id="pass"
-              type={'password'}
-              aria-label="Agregar contraseña"
-              className={`mt-1 block w-full hover:bg-blue-50 ${error ? 'border-red-500 bg-red-100 hover:bg-red-50 focus-visible:ring-[2px] focus-visible:ring-red-500' : ''} `}
-              placeholder="Ingresa aqui tu token."
-              onChange={(e) => setPass(e.target.value) || limpiarError()}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter') {
-                  verificarToken();
-                }
-              }}
-            ></Input>
+            <form>
+              <Input
+                id="pass"
+                type={'password'}
+                autoComplete="off"
+                className={`mt-1 block w-full hover:bg-blue-50 ${error ? 'border-red-500 bg-red-100 hover:bg-red-50 focus-visible:ring-[2px] focus-visible:ring-red-500' : ''} `}
+                placeholder="Ingresa aqui tu token."
+                onChange={(e) => setPass(e.target.value) || limpiarError()}
+              ></Input>
 
-            <Button
-              className={'mx-auto mt-4 w-full p-1 hover:text-gray-300'}
-              aria-label="Confirmar pass"
-              onClick={verificarToken}
-              disabled={!pass}
-            >
-              Confirmar token{' '}
-            </Button>
+              <Button
+                type="submit"
+                className={'mx-auto mt-4 w-full p-1 hover:text-gray-300'}
+                onClick={verificarToken}
+                disabled={!pass}
+              >
+                Confirmar token{' '}
+              </Button>
+            </form>
           </div>
         </div>
       </div>
-      {/* <p className="mt-2 font-bold text-yellow-400">{token}</p> */}
       {showModal && (
         <Dialog open={showModal} onOpenChange={setShowModal}>
           <DialogContent>
@@ -149,6 +150,6 @@ export default function Page() {
           </DialogContent>
         </Dialog>
       )}
-    </div>
+    </section>
   );
 }

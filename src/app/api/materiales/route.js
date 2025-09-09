@@ -1,11 +1,7 @@
 import connectToDatabase from '@/mongoose/mongoose';
 import { Material } from '@/mongoose/todo-model';
 import { NextResponse } from 'next/server';
-
-const DICCIONARIO = Object.freeze({
-  ERROR: 'Falta rellenar uno/s campos, Por favor, revisa los campos',
-  OKAY: 'Salio todo como se esperaba, nice!',
-});
+import { DICCIONARIO } from '@/utils/diccionario/constantes';
 
 export async function POST(req) {
   const data = await req.json();
@@ -30,9 +26,6 @@ export async function GET() {
 export async function PUT(req) {
   const data = await req.json();
   const { id, material, costo, inventario } = data;
-  if (!id || !material || !costo || !inventario) {
-    return new NextResponse(JSON.stringify({ message: DICCIONARIO.ERROR }), { status: 400 });
-  }
 
   try {
     await connectToDatabase();
@@ -61,10 +54,6 @@ export async function PUT(req) {
 export async function DELETE(req) {
   const data = await req.json();
   const { id } = data;
-  if (!id) {
-    return new NextResponse(JSON.stringify({ message: DICCIONARIO.ERROR }), { status: 400 });
-  }
-
   try {
     await connectToDatabase();
     const borrarMaterialList = await Material.findByIdAndDelete(id);

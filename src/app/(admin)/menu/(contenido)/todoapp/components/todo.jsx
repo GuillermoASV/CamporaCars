@@ -64,7 +64,7 @@ export default function Todo() {
       const response = await fetch(`/api/generarTODO?filtro=${filterNuqs}`);
       const data = await response.json();
       setLoading(false);
-      setTodos(data); //dolor de huevos
+      setTodos(data);
     } catch (error) {
       toast.error('Hubo un fallo al cargar los Todos', {
         description: 'Probablemente este vacio',
@@ -121,7 +121,7 @@ export default function Todo() {
 
       if (res.ok) {
         fetchHistorial(datos, 'crear');
-        toast.success('Todo salio bien gracias a jesus!', {
+        toast.success('Todo salio bien!', {
           description: 'TODO guardado',
           duration: 3000,
           icon: '✅',
@@ -236,98 +236,96 @@ export default function Todo() {
 
   return (
     <div className="flex h-full flex-col bg-gradient-to-bl from-gray-100 to-red-50 text-center">
-      {/* Modelo de justify-between en este caso justify-end porque como solo es uno no es necesario ahora el between en cualquier caso tendria que ser everly o el otro ya que si no choca con el sidenav trigger. No choca pero se ve feo */}
-      <div className="flex h-18 w-full items-center justify-end bg-gray-900">
-        <Button
-          className={`mr-6 cursor-pointer bg-green-600 text-white ease-in-out hover:bg-green-500 hover:text-black active:scale-95`}
-          onClick={() => setShowModal(!showModal)}
-        >
-          <Plus
-            className={`${showModal ? '' : 'rotate-180 transition-transform duration-500 ease-out'}`}
-          />{' '}
-          Crear una tarea
-        </Button>
-        {isFilterButton ? (
-          <div className="flex items-center">
-            <Button
-              onClick={() => {
-                setIsFilterButton(false);
-                descartarFiltro();
-              }}
-              className={`relative mr-6 cursor-pointer bg-red-600 text-center text-white duration-100 ease-in after:absolute after:inset-[-5px] after:content-[''] hover:bg-red-500 hover:text-black active:scale-95`}
-            >
-              {' '}
-              <SearchX className="mt-0 mr-1.5 animate-pulse" /> Descartar los Filtros
-            </Button>
-          </div>
-        ) : (
-          <div className="flex items-center">
-            <Button
-              onClick={() => setIsFilterButton(true)}
-              className={`relative mr-6 cursor-pointer bg-gray-600 text-center text-white duration-100 ease-in after:absolute after:inset-[-5px] after:content-[''] hover:bg-gray-500 hover:text-black active:scale-95`}
-            >
-              <Search className="mt-0.5 mr-1.5" /> <p> Busqueda con Filtros </p>
-            </Button>
-          </div>
-        )}
-        {isFilterButton && (
-          <div
-            className={`mr-6 flex items-center ${
-              isFilterButton
-                ? 'max-w-[500px] translate-x-0 opacity-100'
-                : 'max-w-0 -translate-x-10 opacity-0'
-            }`}
+      <div className="flex h-18 w-full items-center justify-center bg-gray-900">
+        <h1 className="text-4xl text-white">Tareas</h1>
+        <div className="absolute right-0 flex">
+          <Button
+            className={`mr-6 cursor-pointer bg-green-600 text-white ease-in-out hover:bg-green-500 hover:text-black active:scale-95`}
+            onClick={() => setShowModal(!showModal)}
           >
-            <Popover open={open} onOpenChange={setOpen} className="relative">
-              {filterNuqs !== 'all' && (
-                <Delete
-                  className="absolute right-16 cursor-pointer text-red-500 hover:rounded-sm hover:bg-red-100 hover:text-red-700 active:scale-98 active:ease-out"
-                  onClick={descartarFiltro}
-                ></Delete>
-              )}
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={open}
-                  className={'w-[240px] justify-between overflow-hidden'}
-                >
-                  {filterNuqs !== 'all'
-                    ? todoCategories.find((categories) => categories.value === filterNuqs)?.label
-                    : 'Selecciona el filtro'}
-                  <ChevronsUpDown className="opacity-50" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[200px] p-0">
-                <Command>
-                  <CommandInput placeholder="Buscar filtros..." className="h-9" />
-                  <CommandList>
-                    <CommandEmpty>Filtro no disponible</CommandEmpty>
-                    <CommandGroup>
-                      {todoCategories.map((filtro) => (
-                        <CommandItem
-                          key={filtro.value}
-                          value={filtro.value}
-                          onSelect={(currentValue) => {
-                            setFilterNuqs(currentValue === value ? 'all' : currentValue);
-                            setValue(currentValue === value ? '' : currentValue);
-                            setOpen(false);
-                          }}
-                        >
-                          {filtro.label}
-                          <Separator className={'absolute right-0 bottom-0 flex-1'} />
-                          <Check
-                            className={`ml-auto ${value === filtro.value ? 'opacity-100' : 'opacity-0'}`}
-                          />
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
-          </div>
-        )}
+            <Plus
+              className={`${showModal ? '' : 'rotate-180 transition-transform duration-500 ease-out'}`}
+            />{' '}
+            Crear una tarea
+          </Button>
+          {isFilterButton ? (
+            <div className="flex items-center">
+              <Button
+                onClick={() => {
+                  setIsFilterButton(false);
+                  descartarFiltro();
+                }}
+                className={`relative mr-6 cursor-pointer bg-red-600 text-center text-white duration-100 ease-in after:absolute after:inset-[-5px] after:content-[''] hover:bg-red-500 hover:text-black active:scale-95`}
+              >
+                {' '}
+                <SearchX className="mt-0 mr-1.5 animate-pulse" /> Descartar los Filtros
+              </Button>
+            </div>
+          ) : (
+            <div className="flex items-center">
+              <Button
+                onClick={() => setIsFilterButton(true)}
+                className={`relative mr-6 cursor-pointer bg-gray-600 text-center text-white duration-100 ease-in after:absolute after:inset-[-5px] after:content-[''] hover:bg-gray-500 hover:text-black active:scale-95`}
+              >
+                <Search className="mt-0.5 mr-1.5" /> <p> Busqueda con Filtros </p>
+              </Button>
+            </div>
+          )}
+          {isFilterButton && (
+            <div
+              className={`mr-6 flex items-center ${isFilterButton ? 'opacity-100' : 'opacity-0'}`}
+            >
+              <Popover open={open} onOpenChange={setOpen} className="relative">
+                {filterNuqs !== 'all' && (
+                  <Delete
+                    className="absolute right-16 cursor-pointer text-red-500 hover:rounded-sm hover:bg-red-100 hover:text-red-700 active:scale-98 active:ease-out"
+                    onClick={descartarFiltro}
+                  ></Delete>
+                )}
+                <PopoverTrigger asChild>
+                  <Button
+                    variant="outline"
+                    role="combobox"
+                    aria-expanded={open}
+                    className={'w-[240px] justify-between overflow-hidden'}
+                  >
+                    {filterNuqs !== 'all'
+                      ? todoCategories.find((categories) => categories.value === filterNuqs)?.label
+                      : 'Selecciona el filtro'}
+                    <ChevronsUpDown className="opacity-50" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent className="w-[200px] p-0">
+                  <Command>
+                    <CommandInput placeholder="Buscar filtros..." className="h-9" />
+                    <CommandList>
+                      <CommandEmpty>Filtro no disponible</CommandEmpty>
+                      <CommandGroup>
+                        {todoCategories.map((filtro) => (
+                          <CommandItem
+                            key={filtro.value}
+                            value={filtro.value}
+                            onSelect={(currentValue) => {
+                              setFilterNuqs(currentValue === value ? 'all' : currentValue);
+                              setValue(currentValue === value ? '' : currentValue);
+                              setOpen(false);
+                            }}
+                          >
+                            {filtro.label}
+                            <Separator className={'absolute right-0 bottom-0 flex-1'} />
+                            <Check
+                              className={`ml-auto ${value === filtro.value ? 'opacity-100' : 'opacity-0'}`}
+                            />
+                          </CommandItem>
+                        ))}
+                      </CommandGroup>
+                    </CommandList>
+                  </Command>
+                </PopoverContent>
+              </Popover>
+            </div>
+          )}
+        </div>
       </div>
       <Todos
         todos={todos}

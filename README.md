@@ -1,6 +1,6 @@
 ##  TodoCars
 
-Este proyecto es una aplicación para el control de trabajos en un taller de latonería y pintura. Permite asignar tareas/actividades a los trabajadores y dar seguimiento de presupuesto a las tareas del taller, facilitando la gestión. 
+Este proyecto es una aplicación de tareas (Todo App) diseñada para talleres de latonería y pintura. Permite organizar, asignar y dar seguimiento a las tareas del taller, facilitando la gestión diaria y mejorando la productividad del equipo.  
   
 ### Estructura de carpetas del proyecto
 

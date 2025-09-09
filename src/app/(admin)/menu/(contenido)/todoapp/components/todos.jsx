@@ -49,7 +49,6 @@ function Mayuscula(todo) {
   return upper;
 }
 
-// small custom components are provided via `markdownComponents.jsx`
 const Todos = ({
   todos,
   loading,
@@ -59,7 +58,7 @@ const Todos = ({
   ABRIRMODALCOMPLETARCERRAR,
 }) => {
   return (
-    <div className="mx-auto mt-5 mb-5 flex w-full max-w-400 flex-col items-center space-y-8 rounded-lg bg-gray-200 p-10">
+    <div className="mx-auto mt-5 mb-5 flex w-full max-w-[100rem] flex-col items-center space-y-8 rounded-lg bg-gray-200 p-10">
       <h1 className={`${roboto.className} text-3xl opacity-90`}>Lista de tareas por hacer</h1>
       <div>
         {' '}
@@ -120,17 +119,17 @@ const Todos = ({
             </CardContent>
           </Card>
         ) : (
-          <div className="mb-6 w-full border-amber-600">
+          <div className="mb-6 w-full border-amber-600 break-all">
             {todos.map((todo) => (
               <article
                 key={todo._id}
-                className="relative m-5 flex w-310 min-w-150 items-center justify-center rounded-lg bg-white p-4 shadow-sm shadow-indigo-500/50 hover:shadow-xl"
+                className="relative m-5 flex w-[77.5rem] min-w-[37.5rem] items-center justify-center rounded-lg bg-white p-4 shadow-sm shadow-indigo-500/50 hover:shadow-xl"
               >
-                <div className="flex w-280 flex-col justify-center gap-4">
+                <div className="flex w-[70rem] flex-col justify-center gap-4">
                   <div className="flex flex-row items-start justify-between break-all">
                     <header className="flex flex-row items-center gap-4">
                       <h1
-                        className={`flex max-w-[1000px] gap-2 text-left text-xl font-semibold text-gray-900 capitalize`}
+                        className={`flex max-w-[62.5rem] gap-2 text-left text-xl font-semibold text-gray-900 capitalize`}
                       >
                         {getTaskIconByTitle(todo.titulo)}
                         {todo.titulo}{' '}
@@ -138,10 +137,13 @@ const Todos = ({
                     </header>
                   </div>
                   <div className="flex flex-row items-center gap-2">
+                    <User
+                      size={27}
+                      className="flex rounded-2xl bg-gradient-to-br from-blue-400 to-blue-600 px-1 py-1 text-cyan-200"
+                    />
                     <h3
-                      className={`text-lg font-bold ${roboto.className} flex items-center gap-2 text-gray-600 capitalize`}
+                      className={`max-w-[29rem] text-lg font-bold ${roboto.className} flex items-center gap-2 text-gray-600 capitalize`}
                     >
-                      <User size={23} />
                       {todo.nombre} {todo.apellido}{' '}
                     </h3>
 
@@ -203,7 +205,7 @@ const Todos = ({
                     </div>
                   </div>
                   <div
-                    className={`${roboto.className} mx-auto mt-3 w-240 max-w-[1000px] text-left text-sm break-words text-gray-500`}
+                    className={`${roboto.className} mx-auto mt-3 w-[60rem] max-w-[62.5rem] text-left text-sm break-words text-gray-500`}
                   >
                     <ReactMarkdown remarkPlugins={mdRemarkPlugins} components={mdComponents}>
                       {Mayuscula(todo.descripcion)}

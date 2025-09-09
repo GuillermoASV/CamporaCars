@@ -20,7 +20,7 @@ function Mayuscula(todo) {
 }
 
 const DialogoCompletar = ({ tarea, alCerrar, alConfirmar }) => {
-  if (!tarea) return;
+  if (!tarea) return '';
 
   const completar = () => {
     alConfirmar();
@@ -49,10 +49,10 @@ const DialogoCompletar = ({ tarea, alCerrar, alConfirmar }) => {
           </DialogDescription>
         </DialogHeader>
         <div
-          className={`${tarea.descripcion.length > 270 ? 'h-110' : 'h-70'} max-h-500 min-h-1/4 w-115 min-w-[100] overflow-x-auto rounded-md border bg-gray-100 p-3 break-all`}
+          className={`${tarea.descripcion.length > 270 ? 'h-110' : 'h-70'} max-h-[125rem] min-h-1/4 w-[28.75rem] min-w-[25rem] overflow-x-auto rounded-md border bg-gray-100 p-3 break-all`}
         >
           <div className="flex">
-            <span className="mt-1.5 mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-amber-600 px-2 py-1 text-yellow-300">
+            <span className="mt-1.5 mr-2 flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-amber-600 px-2 py-1 text-yellow-300">
               <Tag size={30} />
             </span>
 
@@ -62,7 +62,7 @@ const DialogoCompletar = ({ tarea, alCerrar, alConfirmar }) => {
             </span>
           </div>
           <div className="mt-1 flex">
-            <span className="mt-1.5 mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 px-2 py-1 text-blue-300">
+            <span className="mt-1.5 mr-2 size-8 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 px-2 py-1 text-blue-300">
               <UserRoundPen size={30} />
             </span>
 
@@ -84,7 +84,7 @@ const DialogoCompletar = ({ tarea, alCerrar, alConfirmar }) => {
             </span>
           </div>
           <div className="mt-1 flex">
-            <span className="mt-1.5 mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-violet-600 px-2 py-1 text-gray-300">
+            <span className="mt-1.5 mr-2 flex size-8 items-center justify-center rounded-full bg-gradient-to-br from-violet-500 to-violet-600 px-2 py-1 text-gray-300">
               <NotebookText size={30} />
             </span>
             <span>

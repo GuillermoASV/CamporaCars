@@ -1,15 +1,11 @@
 import connectToDatabase from '@/mongoose/mongoose';
 import { Todo } from '@/mongoose/todo-model';
+import { DICCIONARIO } from '@/utils/diccionario/constantes';
 import { NextResponse } from 'next/server';
 
 export async function PUT(req) {
   const data = await req.json();
   const { id } = data;
-  if (!id) {
-    return new NextResponse(
-      JSON.stringify({ message: 'Hubo un error al completar la tarea' }, { status: 400 }),
-    );
-  }
 
   try {
     await connectToDatabase();

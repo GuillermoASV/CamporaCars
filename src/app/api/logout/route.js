@@ -1,5 +1,6 @@
 import { serialize } from 'cookie';
 import { NextResponse } from 'next/server';
+import { DICCIONARIO } from '@/utils/diccionario/constantes';
 
 export async function POST() {
   try {
@@ -9,16 +10,13 @@ export async function POST() {
       maxAge: 0,
       path: '/',
     });
-    return new NextResponse(
-      JSON.stringify({ success: true, message: 'Sesión cerrada exitosamente.' }),
-      {
-        status: 200,
-        headers: { 'Set-Cookie': expiredCookie },
-      },
-    );
+    return new NextResponse(JSON.stringify({ success: true, message: DICCIONARIO.LOGOUT }), {
+      status: 200,
+      headers: { 'Set-Cookie': expiredCookie },
+    });
   } catch (error) {
-    console.error('Error al intentar cerrar sesión en el servidor:', error);
-    return new NextResponse(JSON.stringify({ success: false, error: 'Error al cerrar sesión.' }), {
+    console.error(DICCIONARIO.ERROR_GLOBAL, error.message);
+    return new NextResponse(JSON.stringify({ success: false, error: DICCIONARIO.ERROR_GLOBAL }), {
       status: 500,
     });
   }

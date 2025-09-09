@@ -35,10 +35,10 @@ const DialogoEliminar = ({ tarea, alCerrar, alConfirmar }) => {
           </DialogDescription>
         </DialogHeader>
         <div
-          className={`h-50 max-h-500 min-h-1/4 w-115 min-w-[100] overflow-x-auto rounded-md border bg-gray-100 p-3 break-all`}
+          className={`h-50 max-h-500 min-h-1/4 w-[28.75rem] min-w-[100] overflow-x-auto rounded-md border bg-gray-100 p-3 break-all`}
         >
           <div className="flex">
-            <span className="mt-1.5 mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-orange-600/90 px-2 py-1 text-orange-300">
+            <span className="mt-1.5 mr-2 flex size-8 items-center justify-center rounded-full bg-orange-600/90 px-2 py-1 text-orange-300">
               <Package size={30} />
             </span>
             <span>
@@ -47,7 +47,7 @@ const DialogoEliminar = ({ tarea, alCerrar, alConfirmar }) => {
             </span>
           </div>
           <div className="mt-1 flex">
-            <span className="mt-1.5 mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-green-700/90 px-2 py-1 text-green-300">
+            <span className="mt-1.5 mr-2 flex size-8 items-center justify-center rounded-full bg-green-700/90 px-2 py-1 text-green-300">
               <DollarSign size={30} />
             </span>
             <span>
@@ -56,7 +56,7 @@ const DialogoEliminar = ({ tarea, alCerrar, alConfirmar }) => {
             </span>
           </div>
           <div className="mt-1 flex">
-            <span className="mt-1.5 mr-2 flex h-8 w-8 items-center justify-center rounded-full bg-blue-700/90 px-2 py-1 text-blue-300">
+            <span className="mt-1.5 mr-2 flex size-8 items-center justify-center rounded-full bg-blue-700/90 px-2 py-1 text-blue-300">
               <PackageSearch size={30} />
             </span>
             <span>
@@ -67,7 +67,7 @@ const DialogoEliminar = ({ tarea, alCerrar, alConfirmar }) => {
         </div>
         <div className="mt-1 rounded-md border border-amber-200 bg-amber-50 p-3">
           <div className="flex items-start">
-            <AlertTriangle className="mt-0.5 mr-2 h-4 w-4 flex-shrink-0 text-amber-500" />
+            <AlertTriangle className="mt-0.5 mr-2 size-4 flex-shrink-0 text-amber-500" />
             <p className="text-xs text-amber-700">
               Esta acción no se puede deshacer. El material será eliminado permanentemente del
               sistema.

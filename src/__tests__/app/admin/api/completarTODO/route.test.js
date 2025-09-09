@@ -9,12 +9,7 @@ jest.mock('next/server', () => ({
     status: init ? init.status : 200,
   })),
 }));
-
-// CORRECCIÓN 1: Configuración del mock encadenado
-// 1a. Crea una referencia a la función mock para la parte final de la cadena (.save)
 const mockSave = jest.fn().mockResolvedValue(ToDo);
-
-// 1b. Crea una referencia para la parte media de la cadena (.withDeleted)
 const mockWithDeleted = jest.fn().mockResolvedValue({
   ...ToDo,
   save: mockSave,

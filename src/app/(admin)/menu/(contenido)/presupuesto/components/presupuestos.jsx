@@ -42,7 +42,6 @@ import {
   NotebookPen,
   Search,
   SearchX,
-  TrendingUpIcon,
 } from 'lucide-react';
 
 import { useQueryState } from 'nuqs';
@@ -50,7 +49,7 @@ import { Suspense } from 'react';
 import { toast } from 'sonner';
 import DialogoGanancias from './ganancias';
 import DialogoGastos from './gastos';
-import { fetchHistorialPresupuesto } from '@/utils/makeHistorial';
+import { fetchHistorialInventario, fetchHistorialPresupuesto } from '@/utils/makeHistorial';
 import DialogoPresupuesto from './presupuesto';
 
 export default function Presupuesto() {
@@ -97,7 +96,6 @@ export default function Presupuesto() {
       label: 'Importancia Baja',
     },
   ];
-
   const OpcionesMenu = (todo, AbrirGastos, AbrirGanancias, AbrirPresupuesto) => {
     const mostrarOpcionesCompletas = !todo.completado && !todo.deleted;
 
@@ -115,16 +113,16 @@ export default function Presupuesto() {
             <DropdownMenuSeparator />
             {mostrarOpcionesCompletas && (
               <DropdownMenuItem className="cursor-pointer" onClick={() => AbrirGastos(todo)}>
-                <NotebookPen className="mr-2 h-4 w-4" />
+                <NotebookPen className="mr-2 size-4" />
                 <span>Gastos</span>
               </DropdownMenuItem>
             )}
             <DropdownMenuItem className="cursor-pointer" onClick={() => AbrirPresupuesto(todo)}>
-              <CircleDollarSign className="mr-2 h-4 w-4" />
+              <CircleDollarSign className="mr-2 size-4" />
               <span>Presupuesto</span>
             </DropdownMenuItem>{' '}
             <DropdownMenuItem className="cursor-pointer" onClick={() => AbrirGanancias(todo)}>
-              <ChartNoAxesCombined className="mr-2 h-4 w-4" />
+              <ChartNoAxesCombined className="mr-2 size-4" />
               <span>Ganancias</span>
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -183,19 +181,26 @@ export default function Presupuesto() {
     fetchTodo();
   }, [filterNuqs]);
 
-  const CONFIRMARGASTOS = async (informacionActualizada) => {
+  const CONFIRMARGASTOS = async (informacionActualizada, informacionActualizada2) => {
     const response = await fetch(`/api/gastosTODO`, {
       headers: { 'content-type': 'application/json' },
       method: 'PUT',
       body: JSON.stringify(informacionActualizada),
     });
-    if (!response.ok) {
+    if (informacionActualizada2) {
+      const response2 = await fetch(`/api/materiales`, {
+        headers: { 'content-type': 'application/json' },
+        method: 'PUT',
+        body: JSON.stringify(informacionActualizada2),
+      });
+      fetchHistorialInventario(tareaSeleccionadaGastos, 'Inventario');
+    } else if (!response.ok) {
       toast.error('Error al actualizar los datos de gastos del TODO', {
         description: 'Vuelve a intentarlo',
         duration: 5000,
         icon: '❌',
       });
-      return;
+      return null;
     }
     fetchHistorialPresupuesto(tareaSeleccionadaGastos, 'gasto');
     toast.success('Tarea actualizada con éxito!!', { icon: '✅', duration: 5000 });
@@ -234,8 +239,8 @@ export default function Presupuesto() {
 
   return (
     <div className="min-h-screen bg-gradient-to-bl from-gray-100 to-red-50">
-      <div className="relative mb-20 flex h-18 w-full items-center justify-center bg-gray-900">
-        <h1 className="text-4xl text-white">Presupuesto</h1>{' '}
+      <header className="relative mb-20 flex h-18 w-full items-center justify-center bg-gray-900">
+        <h1 className="text-4xl text-white">Presupuesto</h1>
         <div className="absolute right-0 flex">
           {isFilterButton ? (
             <div className="flex items-center">
@@ -264,11 +269,7 @@ export default function Presupuesto() {
           )}
           {isFilterButton && (
             <div
-              className={`mr-6 flex items-center ${
-                isFilterButton
-                  ? 'max-w-[500px] translate-x-0 opacity-100'
-                  : 'max-w-0 -translate-x-10 opacity-0'
-              }`}
+              className={`mr-6 flex items-center ${isFilterButton ? 'opacity-100' : 'opacity-0'}`}
             >
               <Popover open={open} onOpenChange={setOpen} className="relative">
                 {filterNuqs !== 'all' && (
@@ -321,7 +322,7 @@ export default function Presupuesto() {
             </div>
           )}
         </div>
-      </div>
+      </header>
       <div className="min-h-screen">
         {loading ? (
           <div className="flex items-center justify-center gap-2">
@@ -340,20 +341,23 @@ export default function Presupuesto() {
             }`}{' '}
           </span>
         ) : (
-          <div className="mx-auto max-w-550 items-center">
+          <section
+            aria-labelledby="Lista de presupuestos"
+            className="mx-auto max-w-[137.5rem] items-center"
+          >
             <div className="-mt-4 mb-4 ml-4 grid grid-cols-1 gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
               {todos.map((todo) => (
-                <div key={todo._id}>
+                <article key={todo._id}>
                   <Suspense>
-                    <div className="flex h-65 min-h-30 w-110 max-w-125 min-w-70 flex-col justify-between rounded-xl border bg-gray-100 shadow-md shadow-indigo-500/50 duration-200 ease-out hover:scale-105 hover:bg-gray-300/90 hover:shadow-xl sm:w-80 md:h-60 md:w-85 lg:w-100">
+                    <div className="flex h-65 min-h-30 w-[27.5rem] max-w-[31.25rem] min-w-[17.5rem] flex-col justify-between rounded-xl border bg-gray-100 shadow-md shadow-indigo-500/50 duration-200 ease-out hover:scale-105 hover:bg-gray-300/90 hover:shadow-xl sm:w-[20rem] md:h-[15rem] md:w-[21.25rem] lg:w-[25rem]">
                       <div className="adsolute mt-2 flex justify-between">
-                        <div className="ml-4 flex">
+                        <header className="ml-4 flex">
                           <p
-                            className={`border-b-2 ${todo.importancia === 'Alta' ? 'border-red-600' : todo.importancia === 'Media' ? 'border-yellow-500' : 'border-green-600'}`}
+                            className={`foun max-w-[20rem] truncate border-b-2 font-bold ${todo.importancia === 'Alta' ? 'border-red-600' : todo.importancia === 'Media' ? 'border-yellow-500' : 'border-green-600'}`}
                           >
                             {todo.titulo}
                           </p>
-                        </div>
+                        </header>
                         {/* Emilio, revisa si te gusta y ver si se lo adaptamos a el archivado en este caso pasa evitar que le agregen cosas a las cosas que estan archivadas por seguridad del cliente. */}
                         {todo.completado
                           ? OpcionesMenu(todo, 0, ABRIRMODALGANANCIAS)
@@ -411,7 +415,7 @@ export default function Presupuesto() {
                           )}
                         </div>
                       </div>
-                      <div className="m-2 flex min-h-[20px] min-w-[322px] justify-between">
+                      <footer className="m-2 flex min-h-[20px] min-w-[322px] justify-between">
                         <span className="flex rounded-xl bg-gray-100 px-2">
                           <Clock size={17} className="mt-0.5 mr-1" />
                           <p className="text-sm">{todo.fecha}</p>
@@ -421,7 +425,7 @@ export default function Presupuesto() {
                         >
                           <span className="flex">
                             <div
-                              className={`mt-1.5 h-2 w-2 rounded-full ${todo.deleted ? 'bg-transparent' : todo.completado === true ? 'bg-yellow-300' : 'bg-green-300'}`}
+                              className={`mt-1.5 size-2 rounded-full ${todo.deleted ? 'bg-transparent' : todo.completado === true ? 'bg-yellow-300' : 'bg-green-300'}`}
                             ></div>
                             {todo.deleted ? (
                               'ARCHIADO'
@@ -432,13 +436,13 @@ export default function Presupuesto() {
                             )}
                           </span>
                         </span>
-                      </div>
+                      </footer>
                     </div>
                   </Suspense>
-                </div>
+                </article>
               ))}
             </div>
-          </div>
+          </section>
         )}
       </div>
       {gastosTarea && (

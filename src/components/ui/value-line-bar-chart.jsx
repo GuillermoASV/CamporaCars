@@ -10,6 +10,8 @@ import { cn } from '@/lib/utils';
 import { JetBrains_Mono } from 'next/font/google';
 import { useSpring } from 'framer-motion';
 
+const infoTareaStyle = 'text-muted-foreground overflow-x-auto text-sm';
+
 const jetBrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
@@ -161,22 +163,23 @@ export function ValueLineBarChart({ datosProducto }) {
         </AnimatePresence>
         <div className="flex flex-col items-center justify-center">
           <Badge variant="secondary" className={'mt-6 w-[270px] gap-2 bg-gray-200 text-black'}>
-            <span>
+            <span className="truncate">
               Gasto total en {material}: {maxValueIndex.value}$
             </span>
           </Badge>
-          <div className="flex items-center justify-center gap-4 text-left">
-            <span className="text-muted-foreground text-sm">
+          <div className="flex max-w-[25.8rem] items-center justify-center gap-4 text-left">
+            <span className={`${infoTareaStyle} max-w-[10rem]`}>
               Material seleccionado: {material}{' '}
             </span>
             <div className="mt-4 mb-4 flex gap-4">
-              <span className="text-muted-foreground text-sm">
-                Costo por unidad: {costoUnidad}$
-              </span>
-              <span className="text-muted-foreground text-sm">Cantidad utilizada: {cantidad}</span>
+              <span className={`${infoTareaStyle}`}>Costo por unidad: {costoUnidad}$</span>
+              <span className={`${infoTareaStyle}`}>Cantidad utilizada: {cantidad}</span>
             </div>
           </div>
-          <Badge variant="secondary" className={'mt-6 w-full gap-2 bg-gray-200/80 text-black'}>
+          <Badge
+            variant="secondary"
+            className={'mt-6 w-full gap-2 overflow-x-auto bg-gray-200/80 text-black'}
+          >
             <span>Total de materiales utilizados: {totalMateriales(chartData)}</span>
           </Badge>
         </div>

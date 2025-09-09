@@ -1,7 +1,8 @@
+import { DICCIONARIO } from '@/utils/diccionario/constantes';
 import { SignJWT } from 'jose';
 import { NextResponse } from 'next/server';
 
-const secret_key = new TextEncoder().encode('clave_secreta');
+const secret_key = new TextEncoder().encode(process.env.CLAVE_SECRETA);
 
 export async function GET(request) {
   try {
@@ -13,7 +14,6 @@ export async function GET(request) {
 
     return NextResponse.json({ token: token }, { status: 200 });
   } catch (e) {
-    console.log('Error al crear el token', e.message);
-    return NextResponse.json({ error: 'Hubo un error al crear el token' }, { status: 500 });
+    return NextResponse.json({ error: DICCIONARIO.ERROR_GLOBAL }, { status: 500 });
   }
 }

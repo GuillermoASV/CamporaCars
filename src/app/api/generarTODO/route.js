@@ -1,18 +1,11 @@
 import connectToDatabase from '@/mongoose/mongoose';
 import { Todo } from '@/mongoose/todo-model';
 import { NextResponse } from 'next/server';
-
-const DICCIONARIO = Object.freeze({
-  ERROR: 'Falta rellenar uno/s campos para generar el TODO, Por favor, revisa los campos',
-  OKAY: 'Salio todo como se esperaba, nice!',
-});
+import { DICCIONARIO } from '@/utils/diccionario/constantes';
 
 export async function POST(req) {
   const data = await req.json();
   const { nombre, apellido, descripcion, fecha, limiteFecha, importancia, titulo } = data;
-  if (!nombre || !apellido || !descripcion || !fecha || !limiteFecha || !importancia || !titulo) {
-    return new NextResponse(JSON.stringify({ message: DICCIONARIO.ERROR }), { status: 400 });
-  }
   await connectToDatabase();
   const todo = await Todo.create({
     nombre,

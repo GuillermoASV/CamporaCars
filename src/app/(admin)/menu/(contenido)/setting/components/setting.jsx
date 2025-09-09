@@ -92,7 +92,7 @@ const Setting = () => {
       });
 
       if (res.ok) {
-        toast.success('Todo salio bien gracias a jesus!', {
+        toast.success('Todo salio bien!', {
           description: 'TODO guardado',
           duration: 3000,
           icon: '✅',
@@ -208,19 +208,19 @@ const Setting = () => {
                         >
                           <div className="mb-2 flex-1 sm:mb-0">
                             <div className="flex items-center">
-                              <Box className="mr-2 h-4 w-4 text-orange-500" />
+                              <Box className="mr-2 size-4 text-orange-500" />
                               <h4 className="text-xs font-semibold tracking-wide text-gray-500">
                                 MATERIAL
                               </h4>
                             </div>
-                            <p className="mt-1 ml-6 cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-orange-600">
+                            <p className="mt-1 ml-6 cursor-pointer overflow-x-auto text-base font-medium text-gray-900 transition-colors hover:text-orange-600 md:max-w-[7rem] lg:max-w-[21.9rem] xl:max-w-[32.5rem]">
                               {materiales.materialYCosto[0]}
                             </p>
                           </div>
 
                           <div className="mb-2 flex-1 sm:mb-0">
                             <div className="flex items-center">
-                              <DollarSign className="mr-2 h-4 w-4 text-green-500" />
+                              <DollarSign className="mr-2 size-4 text-green-500" />
                               <h4 className="text-xs font-semibold tracking-wide text-gray-500">
                                 PRECIO
                               </h4>
@@ -236,7 +236,7 @@ const Setting = () => {
 
                           <div className="mb-2 flex-1 sm:mb-0">
                             <div className="flex items-center">
-                              <PackageSearch className="mr-2 h-4 w-4 text-blue-500" />
+                              <PackageSearch className="mr-2 size-4 text-blue-500" />
                               <h4 className="text-xs font-semibold tracking-wide text-gray-500">
                                 INVENTARIO
                               </h4>
@@ -259,7 +259,7 @@ const Setting = () => {
                               className="group flex items-center justify-center rounded-lg border border-orange-200 p-2 transition-colors duration-200 hover:bg-orange-100"
                               aria-label="Editar material"
                             >
-                              <NotebookPen className="mr-1 h-4 w-4 text-orange-500 group-hover:text-orange-700" />
+                              <NotebookPen className="mr-1 size-4 text-orange-500 group-hover:text-orange-700" />
                               <p className="hidden text-xs text-orange-700 group-hover:text-orange-900 sm:block">
                                 Editar
                               </p>
@@ -270,7 +270,7 @@ const Setting = () => {
                               className="group flex items-center justify-center rounded-lg border border-red-200 p-2 transition-colors duration-200 hover:bg-red-100"
                               aria-label="Eliminar material"
                             >
-                              <Trash2 className="mr-1 h-4 w-4 text-red-500 group-hover:text-red-700" />
+                              <Trash2 className="mr-1 size-4 text-red-500 group-hover:text-red-700" />
                               <p className="hidden text-xs text-red-700 group-hover:text-red-900 sm:block">
                                 Eliminar
                               </p>
@@ -303,19 +303,19 @@ const Setting = () => {
                           >
                             <div className="mb-2 flex-1 sm:mb-0">
                               <div className="flex items-center">
-                                <Box className="mr-2 h-4 w-4 text-orange-500" />
+                                <Box className="mr-2 size-4 text-orange-500" />
                                 <h4 className="text-xs font-semibold tracking-wide text-gray-500">
                                   MATERIAL
                                 </h4>
                               </div>
-                              <p className="mt-1 ml-6 cursor-pointer text-base font-medium text-gray-900 transition-colors hover:text-orange-600">
+                              <p className="mt-1 ml-6 max-w-[60rem] cursor-pointer overflow-x-auto text-base font-medium text-gray-900 transition-colors hover:text-orange-600 md:max-w-[7rem] lg:max-w-[30rem] xl:max-w-[53rem]">
                                 {materiales.materialYCosto[0]}
                               </p>
                             </div>
 
                             <div className="mb-2 flex-1 sm:mb-0">
                               <div className="flex items-center">
-                                <PackageSearch className="mr-2 h-4 w-4 text-blue-500" />
+                                <PackageSearch className="mr-2 size-4 text-blue-500" />
                                 <h4 className="text-xs font-semibold tracking-wide text-gray-500">
                                   EN EXISTENCIA
                                 </h4>
@@ -333,26 +333,6 @@ const Setting = () => {
                   </AccordionItem>
                 </Accordion>
               </div>
-            </AccordionContent>
-          </AccordionItem>
-          <AccordionItem value="item-3">
-            <AccordionTrigger>
-              {' '}
-              <div className="ml-1 flex">
-                <Palette />
-                <p className="mt-0.5 ml-1 flex cursor-pointer text-black">Paleta de colores</p>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className="flex flex-col gap-4 text-balance">
-              <p>
-                We stand behind our products with a comprehensive 30-day return policy. If
-                you&apos;re not completely satisfied, simply return the item in its original
-                condition.
-              </p>
-              <p>
-                Our hassle-free return process includes free return shipping and full refunds
-                processed within 48 hours of receiving the returned item.
-              </p>
             </AccordionContent>
           </AccordionItem>
         </Accordion>

@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Input } from '@/components/ui/input';
 
-//1
 import { Hash, Package, DollarSign, ChevronsUpDown } from 'lucide-react';
 import {
   Command,
@@ -16,10 +15,8 @@ import {
 } from '@/components/ui/command';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
-//2
-
 const DialogoGastos = ({ tarea, alConfirmar }) => {
-  const [titulo, setTitulo] = useState(tarea.titulo);
+  const titulo = tarea.titulo;
   const [materiales, setMateriales] = useState('');
   const [gastos, setGastos] = useState('');
   const [cantidades, setCantidades] = useState('');
@@ -27,6 +24,9 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
   const [lista, setLista] = useState([]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState('');
+  const [enInventario, setEnInventario] = useState(0);
+  const [usarInventario, setUsarInventario] = useState(false);
+  const [descuentoDeInventario, setDescuentoDeInventario] = useState([]);
   if (!tarea) return null;
 
   const componeteGastos = () => {
@@ -36,8 +36,8 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
       !cantidades ||
       isNaN(cantidades) ||
       isNaN(gastos) ||
-      cantidades < 0 ||
-      gastos < 0
+      cantidades <= 0 ||
+      gastos <= 0
     ) {
       toast.error('Hubo un error al procesar los datos', {
         description:
@@ -52,17 +52,31 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
         materiales,
         cantidades,
       };
-      alConfirmar(tareaActualizada);
+      const { idMaterial, label, costo } = descuentoDeInventario;
+      const material = label;
+      const inventario = enInventario - cantidades;
+      const materialActualizada = {
+        id: idMaterial,
+        material,
+        costo,
+        inventario,
+      };
+      usarInventario
+        ? alConfirmar(tareaActualizada, materialActualizada)
+        : alConfirmar(tareaActualizada, null);
     }
   };
+
   const fetchLista = async () => {
     try {
       const response = await fetch(`/api/materiales`);
       const data = await response.json();
       const list = data.map((material) => ({
+        idMaterial: material._id,
         value: material.materialYCosto[0],
         label: material.materialYCosto[0],
         costo: material.materialYCosto[1],
+        inventario: material.materialYCosto[2],
       }));
       setLista(list);
     } catch (error) {
@@ -73,12 +87,15 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
       });
     }
   };
+
   useEffect(() => {
     fetchLista();
   }, []);
 
   const displayValue =
-    materiales || lista.find((item) => item.value === value)?.label || 'Selecciona o escribe';
+    materiales ||
+    lista.find((item) => item.value === value)?.label ||
+    `${usarInventario ? 'Selecciona' : 'Escribe o selecciona'}`;
 
   const limpiarError = () => {
     if (error) {
@@ -87,10 +104,13 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
   };
 
   return (
-    <div>
+    <div className="max-w-[28.9rem]">
       <span className="text-sm text-gray-600">
-        <p className="rounded-sm bg-gray-200 px-1 py-1 pl-2 font-mono">Tarea: {titulo}</p>
+        <p className="overflow-x-auto rounded-sm bg-gray-200 px-1 py-1 pl-2 font-mono">
+          Tarea: {titulo}
+        </p>
       </span>
+
       <div className="mt-6 mb-3 flex justify-between">
         <div className="flex text-sm font-medium">
           <Hash size={20} className="mr-1" />
@@ -105,13 +125,33 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
           <dd className="f mr-3">Costo por unidad</dd>
         </div>
       </div>
+
       <div className="mb-3 flex gap-3">
         <Input
-          placeholder="0"
+          placeholder={usarInventario ? `inventario: ${enInventario || 0}` : 0}
+          max={usarInventario ? enInventario : ''}
           min="0"
           step="1"
           type="number"
-          onChange={(e) => setCantidades(e.target.value) || limpiarError()}
+          value={cantidades}
+          onChange={(e) => {
+            const valorIngresado = e.target.value;
+            const valor = Number(valorIngresado);
+            limpiarError() ||
+              (usarInventario
+                ? valor > enInventario
+                  ? toast.warning(
+                      'Esa cantidad sobrepasa a la del inventario',
+                      {
+                        description: `No puedes aumentar mas la cantidad ya que la cantidad total que tienes en inventario es: ${enInventario}`,
+                        duration: 5000,
+                        icon: '⚠️',
+                      },
+                      setCantidades(enInventario),
+                    )
+                  : setCantidades(valorIngresado)
+                : setCantidades(valorIngresado));
+          }}
           className={'hover:bg-accent hover:opacity-90 hover:transition-all hover:duration-175'}
         />
         <Popover open={open} onOpenChange={setOpen}>
@@ -123,22 +163,26 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
               className="w-[170px] justify-between"
             >
               <span className="truncate">{displayValue}</span>
-              <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+              <ChevronsUpDown className="ml-2 size-4 shrink-0 opacity-50" />
             </Button>
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0">
             <Command>
-              <div className="border-t p-2">
-                <Input
-                  className={'border-gray-700/50'}
-                  placeholder="Escribe un material"
-                  onChange={(e) => {
-                    setMateriales(e.target.value);
-                    setValue('');
-                    setGastos('');
-                  }}
-                />
-              </div>
+              {usarInventario ? (
+                ''
+              ) : (
+                <div className="border-t p-2">
+                  <Input
+                    className={'border-gray-700/50'}
+                    placeholder="Escribe un material"
+                    onChange={(e) => {
+                      setMateriales(e.target.value);
+                      setValue('');
+                      setGastos('');
+                    }}
+                  />
+                </div>
+              )}
               <CommandInput placeholder="Buscar en la lista..." />
               <CommandList>
                 <CommandEmpty>
@@ -153,6 +197,8 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
                       onSelect={(currentValue) => {
                         setMateriales(currentValue === value ? '' : currentValue);
                         setGastos(item.costo);
+                        setDescuentoDeInventario(item);
+                        setEnInventario(usarInventario ? item.inventario : '');
                         setOpen(false);
                       }}
                     >
@@ -169,14 +215,23 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
           min="0"
           step="1"
           type="number"
-          value={gastos}
+          value={gastos || 0}
           onChange={(e) => setGastos(e.target.value) || limpiarError()}
           disabled={!materiales}
           className={'hover:bg-accent hover:opacity-90 hover:transition-all hover:duration-175'}
         />
       </div>
+      <div className="inline-flex justify-center">
+        <input
+          type="checkbox"
+          name="inventario"
+          id="inventario"
+          onChange={() => setUsarInventario(!usarInventario)}
+        />
+        <p className="ml-1.5 text-gray-500">Usar materiales de el inventario</p>
+      </div>
 
-      <Button className={'mx-auto mt-4 block w-full hover:text-gray-300'} onClick={componeteGastos}>
+      <Button className={'mx-auto mt-2 block w-full hover:text-gray-300'} onClick={componeteGastos}>
         Confirmar
       </Button>
     </div>
