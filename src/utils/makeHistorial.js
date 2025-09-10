@@ -45,7 +45,7 @@ export async function fetchHistorialInventario(datos, metodo) {
 }
 
 export async function getHistorial() {
-  const data = await fetch(`${process.env.URL_LOCAL}/api/generarHistorial`);
+  const data = await fetch(`${process.env.URL_BASE}/api/generarHistorial`);
   if (!data.ok) {
     return;
   }
