@@ -226,7 +226,7 @@ const DialogoGastos = ({ tarea, alConfirmar }) => {
           type="checkbox"
           name="inventario"
           id="inventario"
-          onChange={() => setUsarInventario(!usarInventario)}
+          onChange={() => setUsarInventario(!usarInventario) | setCantidades(0)}
         />
         <p className="ml-1.5 text-gray-500">Usar materiales de el inventario</p>
       </div>
