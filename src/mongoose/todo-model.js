@@ -50,7 +50,7 @@ const todoSchema = new mongoose.Schema({
     default: [],
   },
   historialInventario: {
-    type: [Number],
+    type: [String],
     required: false,
     default: [],
   },

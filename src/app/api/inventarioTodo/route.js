@@ -12,7 +12,7 @@ export async function PUT(req) {
       id,
       {
         $push: {
-          historialInventario: [materiales, cantidades],
+          historialInventario: [`Se uso: ${cantidades} de ${materiales} del inventario`],
         },
       },
       {

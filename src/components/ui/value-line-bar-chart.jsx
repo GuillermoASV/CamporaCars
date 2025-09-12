@@ -44,6 +44,12 @@ export function ValueLineBarChart({ datosProducto }) {
       total: gastos[index] * cantidades[index],
     }));
   };
+  const MAPDEDATOINVENTARIO = (datos) => {
+    const { historialInventario } = datos;
+    return historialInventario.map((material) => ({
+      Inventario: material,
+    }));
+  };
 
   const chartData = MAPDEDATOSMATERIALES(datosProducto);
   const totalGanado = (data) => {
@@ -78,6 +84,7 @@ export function ValueLineBarChart({ datosProducto }) {
   const costoUnidad = chartData[maxValueIndex.index]?.gasto ?? 0;
   const material = chartData[maxValueIndex.index]?.material ?? 0;
   const cantidad = chartData[maxValueIndex.index]?.cantidad ?? 0;
+  const inventario = MAPDEDATOINVENTARIO(datosProducto);
 
   return (
     <Card>
@@ -178,7 +185,33 @@ export function ValueLineBarChart({ datosProducto }) {
           </div>
           <Badge
             variant="secondary"
-            className={'mt-6 w-full gap-2 overflow-x-auto bg-gray-200/80 text-black'}
+            className={'mt-2 w-full gap-2 overflow-x-auto bg-gray-200/80 text-black'}
+          >
+            <span>Materiales que fueron usados del inventario: </span>
+          </Badge>
+          <div>
+            {inventario.length > 0 ? (
+              <div className="mt-2 h-[4rem] w-[25rem] overflow-y-auto rounded-sm bg-gray-100">
+                {inventario.map((item, index) => (
+                  <div
+                    key={index}
+                    className="flex flex-col rounded-sm px-1 py-1.5 text-sm hover:bg-gray-200"
+                  >
+                    <p className={`ml-1.5 ${infoTareaStyle}`}>{item.Inventario}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="mt-2 flex h-[2rem] w-[25rem] items-center justify-center overflow-y-auto rounded-sm bg-gray-100 text-sm">
+                <p className="font-bold text-gray-500/80">
+                  No se usaron materiales del inventario.
+                </p>
+              </div>
+            )}
+          </div>
+          <Badge
+            variant="secondary"
+            className={'mt-4 w-full gap-2 overflow-x-auto bg-gray-200/80 text-black'}
           >
             <span>Total de materiales utilizados: {totalMateriales(chartData)}</span>
           </Badge>
