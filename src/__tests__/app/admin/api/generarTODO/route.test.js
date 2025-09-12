@@ -1,4 +1,4 @@
-import { POST } from '@/app/api/generarTODO/route';
+import { POST } from '@/app/api/generarTodo/route';
 import generarTODO from './mock/generarTODO.json';
 import { Todo } from '@/mongoose/todo-model';
 import { NextResponse } from 'next/server';
