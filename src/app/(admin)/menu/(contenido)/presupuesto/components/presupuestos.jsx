@@ -164,7 +164,7 @@ export default function Presupuesto() {
   const fetchTodo = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/buscarTODO?filtro=${filterNuqs}`);
+      const response = await fetch(`/api/buscarTodo?filtro=${filterNuqs}`);
       const data = await response.json();
       setTodos(data);
     } catch (error) {
@@ -182,7 +182,7 @@ export default function Presupuesto() {
   }, [filterNuqs]);
 
   const CONFIRMARGASTOS = async (informacionActualizada, informacionActualizada2) => {
-    const response = await fetch(`/api/gastosTODO`, {
+    const response = await fetch(`/api/gastosTodo`, {
       headers: { 'content-type': 'application/json' },
       method: 'PUT',
       body: JSON.stringify(informacionActualizada),
@@ -214,7 +214,7 @@ export default function Presupuesto() {
   };
 
   const CONFIRMARPRESUPUESTO = async (informacionActualizada) => {
-    const response = await fetch(`/api/presupuestoTODO`, {
+    const response = await fetch(`/api/presupuestoTodo`, {
       headers: { 'content-type': 'application/json' },
       method: 'PUT',
       body: JSON.stringify(informacionActualizada),

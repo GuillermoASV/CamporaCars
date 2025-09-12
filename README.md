@@ -1,7 +1,7 @@
 ##  TodoCars
 
-Este proyecto es una aplicación de tareas (Todo App) diseñada para talleres de latonería y pintura. Permite organizar, asignar y dar seguimiento a las tareas del taller, facilitando la gestión diaria y mejorando la productividad del equipo.  
-  
+Este proyecto es una aplicación de tareas (Todo App) diseñada para talleres de latonería y pintura. Permite organizar, asignar y dar seguimiento a las tareas del taller, facilitando la gestión diaria y mejorando la productividad del equipo.
+
 ### Estructura de carpetas del proyecto
 
 ```plaintext
@@ -21,19 +21,20 @@ src /
 │   ├── (mainlayout)/
 │   │   └── login
 │   ├── api/
-│   │   ├── borrarTODO
-│   │   ├── buscarTODO
-│   │   ├── completarTODO
-│   │   ├── gastosTODO
+│   │   ├── borrarTodo
+│   │   ├── buscarTodo
+│   │   ├── completarTodo
+│   │   ├── gastosTodo
 │   │   ├── generarHistorial
 │   │   ├── generarHistorialPresupuesto
-│   │   ├── generarTODO
+│   │   ├── generarTodo
 │   │   ├── generarToken
+│   │   ├── inventarioTodo
 │   │   ├── logout
 │   │   ├── materiales
-│   │   ├── modificarTODO
-│   │   ├── presupuestoTODO
-│   │   └── verificarToken
+│   │   ├── modificarTodo
+│   │   ├── presupuestoTodo
+│   │   └── verificarTodo
 │   └── hooks
 ├── components/ui
 ├── hooks
