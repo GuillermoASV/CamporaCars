@@ -188,10 +188,15 @@ export default function Presupuesto() {
       body: JSON.stringify(informacionActualizada),
     });
     if (informacionActualizada2) {
-      const response2 = await fetch(`/api/materiales`, {
+      const inventarioMateriales = await fetch(`/api/materiales`, {
         headers: { 'content-type': 'application/json' },
         method: 'PUT',
         body: JSON.stringify(informacionActualizada2),
+      });
+      const inventarioTodo = await fetch(`/api/inventarioTodo`, {
+        headers: { 'content-type': 'application/json' },
+        method: 'PUT',
+        body: JSON.stringify(informacionActualizada),
       });
       fetchHistorialInventario(tareaSeleccionadaGastos, 'Inventario');
     } else if (!response.ok) {

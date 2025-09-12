@@ -49,6 +49,11 @@ const todoSchema = new mongoose.Schema({
     required: false,
     default: [],
   },
+  historialInventario: {
+    type: [String],
+    required: false,
+    default: [],
+  },
   presupuesto: { type: Number, required: false, default: 0 },
   createdAt: { type: Date, default: Date.now },
 });
