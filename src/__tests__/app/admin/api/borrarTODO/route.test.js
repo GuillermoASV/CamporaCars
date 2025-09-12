@@ -1,4 +1,4 @@
-import { DELETE } from '@/app/api/borrarTODO/route';
+import { DELETE } from '@/app/api/borrarTodo/route';
 import ToDo from './mock/ToDo.json';
 import { Todo } from '@/mongoose/todo-model';
 import { NextResponse } from 'next/server';

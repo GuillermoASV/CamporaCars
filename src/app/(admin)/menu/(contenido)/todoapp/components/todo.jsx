@@ -61,7 +61,7 @@ export default function Todo() {
   const fetchTodo = async () => {
     setLoading(true);
     try {
-      const response = await fetch(`/api/generarTODO?filtro=${filterNuqs}`);
+      const response = await fetch(`/api/generarTodo?filtro=${filterNuqs}`);
       const data = await response.json();
       setLoading(false);
       setTodos(data);
@@ -111,7 +111,7 @@ export default function Todo() {
 
   const generarTodo = async (datos) => {
     try {
-      const res = await fetch('/api/generarTODO', {
+      const res = await fetch('/api/generarTodo', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -146,7 +146,7 @@ export default function Todo() {
   };
 
   const CONFIRMARCOMPLETAR = async () => {
-    const response = await fetch(`/api/completarTODO`, {
+    const response = await fetch(`/api/completarTodo`, {
       headers: { 'content-type': 'application/json' },
       method: 'PUT',
       body: JSON.stringify({
@@ -166,7 +166,7 @@ export default function Todo() {
   };
 
   const CONFIRMARARCHIVAR = async () => {
-    const response = await fetch(`/api/borrarTODO`, {
+    const response = await fetch(`/api/borrarTodo`, {
       headers: { 'content-type': 'application/json' },
       method: 'DELETE',
       body: JSON.stringify({
@@ -187,7 +187,7 @@ export default function Todo() {
   };
 
   const CONFIRMAREDITAR = async (tareaActualizada) => {
-    const response = await fetch(`/api/modificarTODO`, {
+    const response = await fetch(`/api/modificarTodo`, {
       headers: { 'content-type': 'application/json' },
       method: 'PUT',
       body: JSON.stringify(tareaActualizada),

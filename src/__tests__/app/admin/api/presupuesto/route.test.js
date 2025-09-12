@@ -1,4 +1,4 @@
-import { PUT } from '@/app/api/presupuestoTODO/route';
+import { PUT } from '@/app/api/presupuestoTodo/route';
 import ToDo from './mock/ToDo.json';
 import { Todo } from '@/mongoose/todo-model';
 import { NextResponse } from 'next/server';

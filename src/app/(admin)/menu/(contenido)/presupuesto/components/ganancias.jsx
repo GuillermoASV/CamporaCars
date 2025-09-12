@@ -1,8 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { ValueLineBarChart } from '@/components/ui/value-line-bar-chart';
-import { Badge } from '@/components/ui/badge';
-import InformacionGan from './informacionGanancia';
 
 const DialogoGanancias = ({ tarea, alConfirmar }) => {
   if (!tarea) return;
@@ -10,7 +8,6 @@ const DialogoGanancias = ({ tarea, alConfirmar }) => {
   return (
     <div>
       <div className="w-full">
-        {/* Dar en vez de martillo bla bla los datos de eso y multiplicar el valor */}
         <ValueLineBarChart datosProducto={tarea}></ValueLineBarChart>
       </div>
       <Button onClick={alConfirmar} className={'mt-4 hover:text-gray-300'}>

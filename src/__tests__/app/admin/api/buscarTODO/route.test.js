@@ -1,4 +1,4 @@
-import { GET } from '@/app/api/buscarTODO/route';
+import { GET } from '@/app/api/buscarTodo/route';
 import mockTodos from './mock/Todos.json';
 import { Todo } from '@/mongoose/todo-model';
 import { NextResponse } from 'next/server';
