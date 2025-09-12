@@ -1,8 +1,6 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { ValueLineBarChart } from '@/components/ui/value-line-bar-chart';
-import { Badge } from '@/components/ui/badge';
-import InformacionGan from './informacionGanancia';
 
 const DialogoGanancias = ({ tarea, alConfirmar }) => {
   if (!tarea) return;
